@@ -1,0 +1,3 @@
+airbrake-ruby (newest 6.2.0, installed 6.1.2)
+aws-partitions (newest 1.626.0, installed 1.624.0)
+aws-sdk-core (newest 3.141.0, installed 3.138.0)
