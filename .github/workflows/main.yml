@@ -13,7 +13,8 @@ jobs:
         ruby-version: 2.7.6
     - name: Run the default task
       run: |
+        gem install rake
         bundle install
-        bundle exec rake
-        bundle exec rake rubocop
+        rake
+        rake rubocop
 
