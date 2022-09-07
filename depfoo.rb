@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 require_relative './lib/depfoo'
 
 timestamp = Time.now.to_i
@@ -22,6 +21,7 @@ g.checkout(depfoo_config.config['TARGET_BRANCH'])
 Depfoo::OutdatedGems.new.call.each do |gem|
   # TODO: deal with empty line in the OutdatedGems
   next if gem.nil?
+
   gem_name = gem[:name]
   gpre = Depfoo::GitlabCheckMergeRequest.new(token: depfoo_config.private_token, gem: gem[:name],
                                              gitlab_url: depfoo_config.gitlab_full_url, working_mode: working_mode)
@@ -39,7 +39,6 @@ Depfoo::OutdatedGems.new.call.each do |gem|
   # - create PR
   #
   # puts source_branch, pr_title
-
 
   # reset back to master
   g.checkout(depfoo_config.config['TARGET_BRANCH'])
