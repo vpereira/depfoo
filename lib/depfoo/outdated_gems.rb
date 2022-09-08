@@ -2,7 +2,7 @@
 
 module Depfoo
   class OutdatedGems
-    def initialize(working_mode:  'patch', gem: nil)
+    def initialize(working_mode: 'patch', gem: nil)
       @working_mode = working_mode
       @gem = gem
       @check_all = @gem.nil?

@@ -30,7 +30,7 @@ module Depfoo
     private
 
     def rubygems_url
-      File.join('https://rubygems.org/gems', @gem, @old_version, @new_version)
+      File.join('https://rubygems.org/gems', @gem, @new_version)
     end
 
     def diffend_url

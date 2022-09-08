@@ -47,14 +47,8 @@ Depfoo::OutdatedGems.new(working_mode: working_mode).call.each do |gem|
   merge_request_body = Depfoo::GitlabPullRequestBody.new(description: merge_request_description,
                                                          source_branch: source_branch, title: pr_title, config: depfoo_config.config).body
 
-  Depfoo::OpenMergeRequest.new(gitlab_url: depfoo_config.gitlab_full_url, token: depfoo_config.private_token, data: merge_request_body).call
-
-  # TODO
-  # - push source branch to origin
-  # - generate the PR description
-  # - create PR
-  #
-  # puts source_branch, pr_title
+  Depfoo::OpenMergeRequest.new(gitlab_url: depfoo_config.gitlab_full_url, token: depfoo_config.private_token,
+                               data: merge_request_body).call
 
   # reset back to master
   git.checkout(depfoo_config.config['TARGET_BRANCH'])
