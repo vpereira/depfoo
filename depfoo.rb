@@ -15,10 +15,10 @@ ignore_list = Depfoo::ReadIgnoreList.new.call
 
 FileUtils.cd(File.join(FileUtils.getwd, depfoo_config.config['PROJECT_SOURCE_CODE']))
 
-g = Git.open(File.join(FileUtils.getwd), log: Logger.new($stdout))
-g.checkout(depfoo_config.config['TARGET_BRANCH'])
+git = Git.open(File.join(FileUtils.getwd), log: Logger.new($stdout))
+git.checkout(depfoo_config.config['TARGET_BRANCH'])
 
-Depfoo::OutdatedGems.new.call.each do |gem|
+Depfoo::OutdatedGems.new(working_mode: working_mode).call.each do |gem|
   # TODO: deal with empty line in the OutdatedGems
   next if gem.nil?
 
@@ -34,16 +34,20 @@ Depfoo::OutdatedGems.new.call.each do |gem|
   source_branch = "update_#{gem_name}_#{working_mode}_#{timestamp}"
   pr_title = "WIP: Dependencies update #{gem_name} #{working_mode} #{timestamp}"
 
-  g.branch(source_branch).checkout
-  `bundle update #{gem_name} --#{working_mode} --strict`
-  g.commit_all("DEPFOO: Update #{gem_name} from #{gem[:old_version]} to #{gem[:new_version]}")
+  git.branch(source_branch).checkout
 
+  # try to update the gem
+  `bundle update #{gem_name} --#{working_mode} --strict`
+
+  git.commit_all("DEPFOO: Update #{gem_name} from #{gem[:old_version]} to #{gem[:new_version]}")
+
+  git.push('origin', source_branch)
   merge_request_description = Depfoo::MergeRequestDescription.new(gem: gem[:name], old_version: gem[:old_version],
                                                                   new_version: gem[:new_version]).render
   merge_request_body = Depfoo::GitlabPullRequestBody.new(description: merge_request_description,
                                                          source_branch: source_branch, title: pr_title, config: depfoo_config.config).body
 
-  puts merge_request_body
+  Depfoo::OpenMergeRequest.new(gitlab_url: depfoo_config.gitlab_full_url, token: depfoo_config.private_token, data: merge_request_body).call
 
   # TODO
   # - push source branch to origin
@@ -53,5 +57,5 @@ Depfoo::OutdatedGems.new.call.each do |gem|
   # puts source_branch, pr_title
 
   # reset back to master
-  g.checkout(depfoo_config.config['TARGET_BRANCH'])
+  git.checkout(depfoo_config.config['TARGET_BRANCH'])
 end
