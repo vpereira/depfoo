@@ -11,7 +11,7 @@ module Depfoo
     end
 
     def template
-      %(
+      <<~HEREDOC
         This merge request updates <%= @gem %> from version <%= @old_version%> to <%= @new_version %>
 
         More information about this update can be found:
@@ -19,8 +19,7 @@ module Depfoo
         <%= rubygems_url %>
 
         <%= diffend_url %>
-
-       )
+      HEREDOC
     end
 
     def render
@@ -30,7 +29,7 @@ module Depfoo
     private
 
     def rubygems_url
-      File.join('https://rubygems.org/gems', @gem, @new_version)
+      File.join('https://rubygems.org/gems', @gem, 'versions', @new_version)
     end
 
     def diffend_url
