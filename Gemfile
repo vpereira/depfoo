@@ -11,3 +11,5 @@ gem 'mocha'
 gem 'pry'
 gem 'rubocop'
 gem 'rubocop-minitest', require: false
+gem 'simplecov'
+gem 'simplecov-lcov'
