@@ -2,10 +2,6 @@
 
 require_relative './spec_helper'
 
-module BundleOutdatedOutput
-  def self.body; end
-end
-
 describe OutdatedGems do
   let(:outdated_gems) { OutdatedGems.new }
   let(:bundle_outdated_output) { File.read(File.join(__dir__, 'fixtures', 'bundle_outdated.txt')) }

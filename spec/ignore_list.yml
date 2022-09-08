@@ -1,0 +1,5 @@
+# this is a place where you can set some gems to a ignore list 
+# gems in this list won't be updated
+ignored_gems:
+  - rails
+  - rubocop
