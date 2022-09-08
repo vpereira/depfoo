@@ -39,6 +39,8 @@ Depfoo::OutdatedGems.new(working_mode: working_mode).call.each do |gem|
   # try to update the gem
   `bundle update #{gem_name} --#{working_mode} --strict`
 
+  next if git.status.changed.empty?
+
   git.commit_all("DEPFOO: Update #{gem_name} from #{gem[:old_version]} to #{gem[:new_version]}")
 
   git.push('origin', source_branch)
