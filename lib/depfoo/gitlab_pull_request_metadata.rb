@@ -15,7 +15,7 @@ module Depfoo
     end
 
     def pr_title
-      "Draft: Dependencies #{@working_mode} update from version #{from_version} to version #{to_version}"
+      "Draft: Dependencies #{@working_mode} update for #{gem_name} from version #{from_version} to version #{to_version}"
     end
 
     def commit_message
