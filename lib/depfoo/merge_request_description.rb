@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Depfoo
+  # TODO: Either move it to PullRequestDescription or rename all
+  # the other classes to MergeRequestSomething
   class MergeRequestDescription
     include ERB::Util
 

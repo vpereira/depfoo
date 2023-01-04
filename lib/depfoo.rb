@@ -18,6 +18,7 @@ require_relative './depfoo/merge_request_description'
 require_relative './depfoo/open_merge_request'
 require_relative './depfoo/gitlab_check_merge_request'
 require_relative './depfoo/gitlab_pull_request_body'
+require_relative './depfoo/gitlab_pull_request_metadata'
 require_relative './depfoo/read_ignore_list'
 
 module Depfoo; end
