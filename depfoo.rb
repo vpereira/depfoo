@@ -31,7 +31,7 @@ Depfoo::OutdatedGems.new(working_mode: working_mode).call.each do |gem|
                                              gitlab_url: depfoo_config.gitlab_full_url, working_mode: working_mode)
   next if gpre.pr_exist?
 
-  gitlab_pr_metadata = Depfoo::GitlabPullRequestMetadata.new(gem)
+  gitlab_pr_metadata = Depfoo::GitlabPullRequestMetadata.new(gem_param: gem, working_mode: working_mode)
 
   source_branch = gitlab_pr_metadata.source_branch
   pr_title = gitlab_pr_metadata.pr_title
