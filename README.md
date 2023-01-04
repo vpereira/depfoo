@@ -11,7 +11,7 @@ some variables to your scheduled job:
 
 GITLAB_PROJECT_ID: That's your project ID.
 
-For the subhub project, one can find it with:
+For your project, one can find it with:
 
 curl -s  'https://gitlab.example.org/api/v4/projects?search=foo/bar&search_namespaces=true' --header "PRIVATE-TOKEN: $TOKEN" | jq .[] | jq ."id"
 => 31337
