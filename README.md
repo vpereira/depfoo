@@ -13,18 +13,20 @@ GITLAB_PROJECT_ID: That's your project ID.
 
 For your project, one can find it with:
 
+```
 curl -s  'https://gitlab.example.org/api/v4/projects?search=foo/bar&search_namespaces=true' --header "PRIVATE-TOKEN: $TOKEN" | jq .[] | jq ."id"
 => 31337
-
+```
 
 
 GITLAB_USER_ID: The user that will be open the PR
 
 That is the ID of the user, not the login. One way to find it is:
 
+```
 curl -s  'https://gitlab.example.org/api/v4/users?username=superuser' --header "PRIVATE-TOKEN: $TOKEN" | jq .[] | jq ."id"
 => 69
-
+```
 
 You can use different solvers like (minor, patch, major and strict). More
 information on https://bundler.io/man/bundle-update.1.html. Just pass it to parameter to `depfoo.rb`, [check this](https://github.com/vpereira/depfoo/blob/master/depfoo.rb#L8) for more information.
