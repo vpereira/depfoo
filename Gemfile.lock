@@ -16,7 +16,7 @@ GEM
       rchardet (~> 1.8)
     json (2.6.3)
     method_source (1.0.0)
-    minitest (5.17.0)
+    minitest (5.18.0)
     mocha (2.0.2)
       ruby2_keywords (>= 0.0.5)
     parallel (1.22.1)
