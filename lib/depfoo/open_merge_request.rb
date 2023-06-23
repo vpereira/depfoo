@@ -11,7 +11,7 @@ module Depfoo
     end
 
     def call
-      Faraday.post(@gitlab_url, { state: 'opened' },
+      Faraday.post(@gitlab_url, { state: 'opened', labels: 'depfoo' },
                    { 'Content-Type' => 'application/json', 'PRIVATE-TOKEN' => @token }) do |req|
         req.body = @data
       end
