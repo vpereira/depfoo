@@ -11,14 +11,26 @@ module Depfoo
     end
 
     def pr_exist?
-      get_all_open_prs_json.collect do |m|
-        m.select do |k, v|
-          k == 'source_branch' && v =~ /update_#{@gem}_#{@working_mode}/
-        end
-      end.reject(&:empty?).any?
+      related_open_prs(check_working_mode: true).reject(&:empty?).any?
+    end
+
+    def pr_to_gem_exist?
+      related_open_prs(check_working_mode: false).reject(&:empty?).any?
     end
 
     private
+
+    def related_open_prs(check_working_mode: false)
+      get_all_open_prs_json.collect do |m|
+        m.select do |k, v|
+          k == 'source_branch' && v =~ /#{regex_for_pr(check_working_mode: check_working_mode)}/
+        end
+      end
+    end
+
+    def regex_for_pr(check_working_mode: false)
+      check_working_mode ? "update_#{@gem}_#{@working_mode}" : "update_#{@gem}_*"
+    end
 
     def get_all_open_prs_json
       JSON.parse get_all_prs.body

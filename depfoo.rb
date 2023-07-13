@@ -29,7 +29,8 @@ Depfoo::OutdatedGems.new(working_mode: working_mode).call.each do |gem|
 
   gpre = Depfoo::GitlabCheckMergeRequest.new(token: depfoo_config.private_token, gem: gem[:name],
                                              gitlab_url: depfoo_config.gitlab_full_url, working_mode: working_mode)
-  next if gpre.pr_exist?
+  # TODO: instead of call next, we could close old related PRs
+  next if gpre.pr_to_gem_exist?
 
   gitlab_pr_metadata = Depfoo::GitlabPullRequestMetadata.new(gem_params: gem, working_mode: working_mode)
 
