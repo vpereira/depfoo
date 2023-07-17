@@ -10,8 +10,15 @@ module Depfoo
     end
 
     def call
-      Faraday.put(mr_url, { state_event: 'close' }.to_json,
+      res = Faraday.put(mr_url, { state_event: 'close' }.to_json,
                   { 'Content-Type' => 'application/json', 'PRIVATE-TOKEN' => @token })
+      if res.success?
+        puts "Merge request #{@merge_request_id} closed"
+      else
+        puts "Merge request #{@merge_request_id} not closed"
+        puts res.body
+      end
+      res
     end
 
     def mr_url

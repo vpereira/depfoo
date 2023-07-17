@@ -32,6 +32,7 @@ Depfoo::OutdatedGems.new(working_mode: working_mode).call.each do |gem|
   # close related PRs
   if gpre.pr_to_gem_exist?
     gpre.related_open_prs(check_working_mode: false).each do |pr|
+      puts "DEPFOO: Closing merge request #{pr['iid']}"
       Depfoo::GitlabCloseMergeRequest.new(gitlab_url: depfoo_config.gitlab_full_url, token: depfoo_config.private_token,
                                           merge_request_id: pr['iid']).call
     end
