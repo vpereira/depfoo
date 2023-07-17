@@ -33,4 +33,18 @@ describe GitlabCheckMergeRequest do
     it { _(gcmr.pr_exist?).must_equal false }
     it { _(gcmr.pr_to_gem_exist?).must_equal true }
   end
+
+  describe '#related_open_prs' do
+    let(:gcmr) do
+      GitlabCheckMergeRequest.new(token: 'foo', gem: 'rails', working_mode: 'minor', gitlab_url: 'https://example.org')
+    end
+
+    before do
+      gcmr.stubs(:get_all_prs).returns(JsonPayload)
+    end
+
+    it { _(gcmr.related_open_prs.size).must_equal 1 }
+    it { _(gcmr.related_open_prs.first.class).must_equal Hash }
+    it { _(gcmr.related_open_prs.first.key?('iid')).must_equal true }
+  end
 end

@@ -22,17 +22,15 @@ module Depfoo
     end
 
     def related_open_prs(check_working_mode: false)
-      get_all_open_prs_json.collect do |m|
-        m.select do |k, v|
-          k == 'source_branch' && v =~ /#{regex_for_pr(check_working_mode: check_working_mode)}/
-        end
+      get_all_open_prs_json.select do |m|
+        m.any? { |k, v| k == 'source_branch' && v =~ /#{regex_for_pr(check_working_mode: check_working_mode)}/ }
       end
     end
 
     private
 
     def regex_for_pr(check_working_mode: false)
-      check_working_mode ? "update_#{@gem}_#{@working_mode}" : "update_#{@gem}_*"
+      check_working_mode ? "update_#{@gem}_#{@working_mode}" : "update_#{@gem}_.+"
     end
 
     def get_all_open_prs_json
