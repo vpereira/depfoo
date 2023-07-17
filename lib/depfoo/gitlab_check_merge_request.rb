@@ -10,15 +10,16 @@ module Depfoo
       @working_mode = working_mode
     end
 
+    # it check if a specific PR exist for a gem and working mode
+    # i.e update_rails_patch or update_rails_minor
     def pr_exist?
       related_open_prs(check_working_mode: true).reject(&:empty?).any?
     end
 
+    # it check if a PR exist for a gem, regardless of the working mode
     def pr_to_gem_exist?
       related_open_prs(check_working_mode: false).reject(&:empty?).any?
     end
-
-    private
 
     def related_open_prs(check_working_mode: false)
       get_all_open_prs_json.collect do |m|
@@ -27,6 +28,8 @@ module Depfoo
         end
       end
     end
+
+    private
 
     def regex_for_pr(check_working_mode: false)
       check_working_mode ? "update_#{@gem}_#{@working_mode}" : "update_#{@gem}_*"
