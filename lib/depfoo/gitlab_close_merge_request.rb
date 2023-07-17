@@ -10,7 +10,7 @@ module Depfoo
     end
 
     def call
-      Faraday.put(mr_url, { state_event: 'close' },
+      Faraday.put(mr_url, { state_event: 'close' }.to_json,
                   { 'Content-Type' => 'application/json', 'PRIVATE-TOKEN' => @token })
     end
 
