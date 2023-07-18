@@ -17,7 +17,8 @@ module Depfoo
         remove_source_branch: true,
         title: @title,
         assignee_id: @config['GITLAB_USER_ID'],
-        description: @description
+        description: @description,
+        labels: ['depfoo']
       }.to_json
     end
   end
