@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'faraday'
 module Depfoo
   class GitlabMergeRequest
     def initialize(token:, gitlab_url:)

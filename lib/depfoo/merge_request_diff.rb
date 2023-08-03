@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'faraday'
-
 module Depfoo
   class MergeRequestDiff
     def initialize(token:, gitlab_url:, merge_request_id:)

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'faraday'
-
 module Depfoo
   class OpenMergeRequest
     def initialize(gitlab_url:, token:, data:)
