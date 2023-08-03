@@ -11,8 +11,9 @@ require 'fileutils'
 require 'dotenv'
 
 require_relative './depfoo/version'
-require_relative './depfoo/prepare_config'
-require_relative './depfoo/config'
+require_relative './depfoo/config/prepare_config'
+require_relative './depfoo/config/config'
+require_relative './depfoo/config/read_ignore_list'
 require_relative './depfoo/outdated_gems'
 require_relative './depfoo/merge_request_description'
 require_relative './depfoo/open_merge_request'
@@ -24,6 +25,5 @@ require_relative './depfoo/gitlab/check_merge_request'
 require_relative './depfoo/gitlab/close_merge_request'
 require_relative './depfoo/gitlab_pull_request_body'
 require_relative './depfoo/gitlab_pull_request_metadata'
-require_relative './depfoo/read_ignore_list'
 
 module Depfoo; end
