@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Depfoo
   class RebaseMergeRequest
     def initialize(token:, gitlab_url:, merge_request_id:)

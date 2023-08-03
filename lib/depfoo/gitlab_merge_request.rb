@@ -17,7 +17,7 @@ module Depfoo
 
     def open_mrs
       JSON.parse(Faraday.get(@gitlab_url, { state: 'opened', labels: label_name },
-                  { 'Content-Type' => 'application/json', 'PRIVATE-TOKEN' => @token }).body)
+                             { 'Content-Type' => 'application/json', 'PRIVATE-TOKEN' => @token }).body)
     end
 
     private
