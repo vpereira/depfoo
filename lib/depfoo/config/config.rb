@@ -8,6 +8,10 @@ module Depfoo
       @config = config
     end
 
+    def label
+      @config['LABEL']
+    end
+
     def gitlab_full_url
       File.join(@config['GITLAB_URL'], @config['GITLAB_PROJECT_ID'], 'merge_requests')
     end

@@ -6,7 +6,8 @@ describe Config do
   let(:config_hash) do
     { 'PRIVATE_TOKEN' => '0xdeadbeef',
       'GITLAB_PROJECT_ID' => '31337',
-      'GITLAB_URL' => 'https://example.org/v4/projects/' }
+      'GITLAB_URL' => 'https://example.org/v4/projects/',
+      'LABEL' => 'depfoo' }
   end
 
   describe '.new' do
@@ -19,5 +20,11 @@ describe Config do
     let(:config) { Config.new(config_hash) }
 
     it { _(config.gitlab_full_url).must_equal('https://example.org/v4/projects/31337/merge_requests') }
+  end
+
+  describe 'label' do
+    let(:config) { Config.new(config_hash) }
+
+    it { _(config.label).must_equal('depfoo') }
   end
 end
