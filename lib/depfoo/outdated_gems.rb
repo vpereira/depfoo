@@ -12,9 +12,9 @@ module Depfoo
       bundle_command_line.split("\n").collect do |x|
         next if x.empty?
 
-        x.match(/^(.+) \(newest (.+), installed (.+)\)/i).captures
-        { name: ::Regexp.last_match(1), new_version: ::Regexp.last_match(2), old_version: ::Regexp.last_match(3) }
-      end
+        match_data = x.match(/^(.+) \(newest (.+), installed (.+)\)/i).captures
+        { name: match_data[0], new_version: match_data[1], old_version: match_data[2] }
+      end.compact
     end
 
     private
