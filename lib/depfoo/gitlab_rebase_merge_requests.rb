@@ -8,9 +8,15 @@ module Depfoo
     end
 
     def call
-      GitlabMergeRequest.new(token: token, gitlab_url: gitlab_url).open_mrs do |mr_id|
-        RebaseMergeRequest.new(token: @token, gitlab_url: @gitlab_url, merge_request_id: mr_id).call
+      open_requests.each do |mr|
+        RebaseMergeRequest.new(token: @token, gitlab_url: @gitlab_url, merge_request_id: mr['iid']).call
       end
+    end
+
+    private
+
+    def open_requests
+      GitlabMergeRequest.new(token: @token, gitlab_url: @gitlab_url).open_mrs
     end
   end
 end
