@@ -1,4 +1,6 @@
 .env
+.env.*
 subhub
+registry_catalog
 .ignore_list.yml
 coverage

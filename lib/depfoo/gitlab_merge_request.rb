@@ -2,9 +2,10 @@
 
 module Depfoo
   class GitlabMergeRequest
-    def initialize(token:, gitlab_url:)
+    def initialize(token:, gitlab_url:, label_name: 'depfoo')
       @token = token
       @gitlab_url = gitlab_url
+      @label_name = label_name
     end
 
     # Probably you must rebase the MRs with master
@@ -15,14 +16,8 @@ module Depfoo
     end
 
     def open_mrs
-      JSON.parse(Faraday.get(@gitlab_url, { state: 'opened', labels: label_name },
+      JSON.parse(Faraday.get(@gitlab_url, { state: 'opened', labels: @label_name },
                              { 'Content-Type' => 'application/json', 'PRIVATE-TOKEN' => @token }).body)
-    end
-
-    private
-
-    def label_name
-      'depfoo'
     end
   end
 end

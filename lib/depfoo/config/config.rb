@@ -19,5 +19,9 @@ module Depfoo
     def private_token
       @config['PRIVATE_TOKEN']
     end
+
+    def branch
+      @config['TARGET_BRANCH']
+    end
   end
 end

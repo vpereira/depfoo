@@ -26,7 +26,8 @@ module Depfoo
       parts = @gitlab_url.split('/')
       parts[-1] = 'repository'
       parts << 'branches'
-      parts << 'master'
+      # it should be passed in the initialize method
+      parts << Depfoo::Config.new(Depfoo::PrepareConfig.new.call).branch
       parts.join('/')
     end
   end

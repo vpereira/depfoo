@@ -11,12 +11,12 @@ private_token=$PRIVATE_TOKEN
 label="depfoo"
 
 # Get all merge requests with the specific label and open state
-merge_requests=$(curl --header "PRIVATE-TOKEN: $private_token" "$gitlab_url/$project_id/merge_requests?state=opened&labels=$label")
+merge_requests=$(curl -v --header "PRIVATE-TOKEN: $private_token" "$gitlab_url/$project_id/merge_requests?state=opened&labels=$label")
 
 # Iterate over the merge requests and close each one
-echo "$merge_requests" | jq -r '.[] | .id' | while read merge_request_id
+echo "$merge_requests" | jq -r '.[] | .iid' | while read merge_request_id
 do
-    echo "Closing merge request $merge_request_id"
+    echo "Closing merge request $merge_request_id" 
     curl --request PUT --header "PRIVATE-TOKEN: $private_token" "$gitlab_url/$project_id/merge_requests/$merge_request_id?state_event=close"
 done
 
