@@ -20,7 +20,7 @@ module Depfoo
     private
 
     def bundle_command_line
-      `bundle outdated --parseable --#{@working_mode} #{@gem}`
+      `bundle outdated --only-explicit --parseable --#{@working_mode} #{@gem}`
     end
   end
 end
