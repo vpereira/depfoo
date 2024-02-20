@@ -81,8 +81,19 @@ options = {
   working_mode: 'patch'
 }
 
+subcommand_descriptions = {
+  'update_gems' => 'Updates gems based on specified working mode (patch, minor, major)',
+  'rebase_mrs' => 'Rebases merge requests',
+  'close_empty_mrs' => 'Closes empty merge requests'
+}
+
 main_options = OptionParser.new do |opts|
-  opts.banner = 'Usage: depfoo [subcommand] [options]'
+  opts.banner = "Usage: depfoo [subcommand] [options]\n\nSubcommands:\n"
+  subcommand_descriptions.each do |cmd, desc|
+    opts.banner += "  #{cmd.ljust(15)} #{desc}\n"
+  end
+  opts.banner += "\nGlobal Options:\n"
+
   opts.on('-e', '--env FILE', 'Path to .env file') do |file|
     options[:env_file] = file
   end
@@ -107,19 +118,23 @@ subcommands = {
   end
 }
 
+# Parse the main options first, without removing them from ARGV
+main_options.order!
+
+# Extract the subcommand
 subcommand = ARGV.shift
 subcommand_opts = subcommands[subcommand]
 
 if subcommand_opts.nil?
   puts main_options
 else
-  main_options.order!(ARGV)
+  # Parse the subcommand options
   subcommand_opts.parse!(ARGV)
   depfoo_config = Depfoo::Config.new(Depfoo::PrepareConfig.new.call(options[:env_file]))
 
   case subcommand
   when 'update_gems'
-    update_gems(options.fetch(:working_mode, 'patch'), depfoo_config) # default to 'patch' if not specified
+    update_gems(options.fetch(:working_mode, 'patch'), depfoo_config)
   when 'rebase_mrs'
     rebase_mrs(depfoo_config)
   when 'close_empty_mrs'
