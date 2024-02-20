@@ -4,3 +4,4 @@ require: rubocop-minitest
 AllCops:
   Exclude:
     - 'subhub/**/*'
+    - 'registry_catalog/**/*'

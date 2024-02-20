@@ -11,7 +11,8 @@ module Depfoo
     # Probably you must rebase the MRs with master
     def empty_mrs
       open_mrs.map do |mr|
-        mr['iid'] if Depfoo::MergeRequestDiff.new(token: @token, gitlab_url: @gitlab_url, merge_request_id: mr['iid']).call.empty?
+        mr['iid'] if Depfoo::MergeRequestDiff.new(token: @token, gitlab_url: @gitlab_url,
+                                                  merge_request_id: mr['iid']).call.empty?
       end.compact
     end
 
