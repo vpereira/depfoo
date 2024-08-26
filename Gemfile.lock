@@ -22,10 +22,10 @@ GEM
     docile (1.4.0)
     dotenv (3.1.2)
     drb (2.2.1)
-    faraday (2.10.1)
-      faraday-net_http (>= 2.0, < 3.2)
+    faraday (2.11.0)
+      faraday-net_http (>= 2.0, < 3.4)
       logger
-    faraday-net_http (3.1.1)
+    faraday-net_http (3.3.0)
       net-http
     git (2.1.1)
       activesupport (>= 5.0)
