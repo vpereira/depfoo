@@ -41,7 +41,7 @@ GEM
     logger (1.6.1)
     method_source (1.0.0)
     minitest (5.25.1)
-    mocha (2.2.0)
+    mocha (2.5.0)
       ruby2_keywords (>= 0.0.5)
     net-http (0.4.1)
       uri
